@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #fff0f5 0%, #fffde7 50%, #e3f2fd 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Floating particles */
+  .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff80ab, #ffd740);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,128,171,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255,128,171,0); }
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #e91e8c 0%, #ff6f00 50%, #1565c0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    animation: titleIn 1s ease-out both;
+  }
+  @keyframes titleIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: #7b1fa2;
+    margin-bottom: 10px;
+    animation: titleIn 1s 0.3s ease-out both;
+  }
+  .hero-name {
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: #1a237e;
+    letter-spacing: 2px;
+    animation: titleIn 1s 0.5s ease-out both;
+  }
+
+  /* Stars row */
+  .stars-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+    animation: titleIn 1s 0.7s ease-out both;
+  }
+  .star { font-size: 24px; animation: starSpin 3s ease-in-out infinite; }
+  .star:nth-child(2) { animation-delay: 0.3s; }
+  .star:nth-child(3) { animation-delay: 0.6s; }
+  .star:nth-child(4) { animation-delay: 0.9s; }
+  .star:nth-child(5) { animation-delay: 1.2s; }
+  @keyframes starSpin {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(20deg); }
+  }
+
+  /* Cake section */
+  .cake-section {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 10px 0;
+  }
+  .cake-container { position: relative; }
+
+  /* SVG Cake */
+  .cake-svg { display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(233,30,140,0.2)); }
+
+  /* Candle flames */
+  .flame {
+    animation: flicker 0.5s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+  }
+  .flame:nth-child(2) { animation-delay: 0.1s; }
+  .flame:nth-child(3) { animation-delay: 0.2s; }
+  .flame:nth-child(4) { animation-delay: 0.15s; }
+  .flame:nth-child(5) { animation-delay: 0.25s; }
+  @keyframes flicker {
+    0% { transform: scaleX(1) scaleY(1); opacity: 1; }
+    100% { transform: scaleX(0.85) scaleY(1.1); opacity: 0.85; }
+  }
+  .sparkle { animation: sparkleAnim 1.5s ease-in-out infinite; }
+  .sparkle:nth-child(2) { animation-delay: 0.5s; }
+  .sparkle:nth-child(3) { animation-delay: 1s; }
+  @keyframes sparkleAnim {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Message section */
+  .message-section {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .message-card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 36px 32px;
+    border: 2px solid rgba(255,128,171,0.3);
+    box-shadow: 0 8px 32px rgba(233,30,140,0.08), 0 0 0 1px rgba(255,255,255,0.5);
+    animation: cardIn 1s 0.8s ease-out both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .message-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: #ad1457;
+    margin-bottom: 16px;
+  }
+  .message-card p {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: #4a148c;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+
+  /* Color dots */
+  .color-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px 0 0;
+  }
+  .dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    animation: dotBounce 1s ease-in-out infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.15s; }
+  .dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes dotBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Gift section */
+  .gift-section {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 24px 60px;
+    text-align: center;
+  }
+  .gift-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: #1a237e;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  /* Gift box */
+  .gift-box {
+    position: relative;
+    cursor: pointer;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;
+  }
+  .gift-box:hover { transform: scale(1.08) rotate(-2deg); }
+  .gift-box:hover .gift-shadow { opacity: 0.5; }
+  .gift-shadow {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 20px;
+    background: rgba(233,30,140,0.2);
+    border-radius: 50%;
+    filter: blur(8px);
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+  .gift-svg { width: 180px; height: 180px; }
+  .gift-bounce { animation: giftBounce 2s ease-in-out infinite; }
+  @keyframes giftBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-2deg); }
+    75% { transform: translateY(-4px) rotate(2deg); }
+  }
+
+  .gift-hint {
+    font-size: 0.9rem;
+    color: #e91e8c;
+    font-weight: 600;
+    letter-spacing: 1px;
+    animation: hintPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes hintPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Reveal overlay */
+  .reveal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(10, 10, 40, 0.85);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .reveal-overlay.show {
+    display: flex;
+    animation: overlayIn 0.4s ease-out both;
+  }
+  @keyframes overlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .reveal-card {
+    background: linear-gradient(135deg, #fff0f9, #fffde7, #e8f5ff);
+    border-radius: 28px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(233,30,140,0.35), 0 0 0 2px rgba(255,128,171,0.4);
+    animation: revealCardIn 0.6s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+  }
+  @keyframes revealCardIn {
+    from { opacity: 0; transform: scale(0.5) rotate(-5deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+  .reveal-emoji { font-size: 60px; margin-bottom: 16px; animation: revealEmoji 0.8s 0.4s ease-out both; }
+  @keyframes revealEmoji {
+    from { opacity: 0; transform: scale(0) rotate(20deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+  .reveal-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #ad1457;
+    margin-bottom: 12px;
+  }
+  .reveal-card p {
+    color: #4a148c;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .reveal-link-box {
+    background: linear-gradient(135deg, #ff80ab, #ffca28, #42a5f5);
+    border-radius: 16px;
+    padding: 3px;
+    margin-bottom: 24px;
+  }
+  .reveal-link-inner {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .reveal-link-label {
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .reveal-link-url {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1565c0;
+    word-break: break-all;
+    text-decoration: none;
+  }
+  .reveal-link-url:hover { color: #ad1457; text-decoration: underline; }
+  .reveal-visit-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #e91e8c, #ff6f00);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 24px rgba(233,30,140,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .reveal-visit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(233,30,140,0.5);
+  }
+  .close-btn {
+    font-size: 0.85rem;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .close-btn:hover { color: #333; }
+
+  /* Confetti burst */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confettiFall linear both;
+  }
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+  }
+
+  /* Footer ribbon */
+  .footer-ribbon {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #7b1fa2;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Particles container -->
+<div class="particles" id="particles"></div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">✨ Special Day ✨</div>
+  <h1>Happy Birthday!</h1>
+  <div class="hero-sub">Wishing the most beautiful person</div>
+  <div class="hero-name">My Dearest Sister 💖</div>
+  <div class="stars-row">
+    <span class="star">⭐</span>
+    <span class="star">🌸</span>
+    <span class="star">💛</span>
+    <span class="star">💙</span>
+    <span class="star">⭐</span>
+  </div>
+</div>
+
+<!-- Cake SVG -->
+<div class="cake-section">
+  <div class="cake-container">
+    <svg class="cake-svg" viewBox="0 0 340 280" width="340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Plate -->
+      <ellipse cx="170" cy="248" rx="120" ry="14" fill="#f8bbd0" opacity="0.5"/>
+
+      <!-- Cake layers -->
+      <!-- Bottom layer -->
+      <rect x="60" y="180" width="220" height="60" rx="8" fill="#f48fb1"/>
+      <ellipse cx="170" cy="180" rx="110" ry="14" fill="#f06292"/>
+      <ellipse cx="170" cy="240" rx="110" ry="14" fill="#ec407a"/>
+
+      <!-- Frosting drips bottom -->
+      <path d="M90,180 Q95,168 100,180 Q108,165 116,180 Q124,165 132,180 Q140,165 148,180 Q156,165 164,180 Q172,165 180,180 Q188,165 196,180 Q204,165 212,180 Q220,165 228,180 Q236,165 244,180 Q252,165 258,180" fill="none" stroke="#fff9c4" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Middle layer -->
+      <rect x="80" y="120" width="180" height="62" rx="8" fill="#ffe082"/>
+      <ellipse cx="170" cy="120" rx="90" ry="12" fill="#ffd54f"/>
+      <ellipse cx="170" cy="182" rx="90" ry="12" fill="#ffca28"/>
+
+      <!-- Frosting drips middle -->
+      <path d="M100,120 Q106,110 112,120 Q119,108 126,120 Q133,108 140,120 Q147,108 154,120 Q161,108 168,120 Q175,108 182,120 Q189,108 196,120 Q203,108 210,120 Q217,108 222,120 Q229,110 234,120" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+
+      <!-- Top layer -->
+      <rect x="100" y="72" width="140" height="50" rx="8" fill="#90caf9"/>
+      <ellipse cx="170" cy="72" rx="70" ry="10" fill="#64b5f6"/>
+      <ellipse cx="170" cy="122" rx="70" ry="10" fill="#42a5f5"/>
+
+      <!-- Frosting drips top -->
+      <path d="M118,72 Q124,63 130,72 Q137,62 144,72 Q151,62 158,72 Q165,62 172,72 Q179,62 186,72 Q193,62 200,72 Q207,62 212,72" fill="none" stroke="#fff9c4" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Decorative dots on layers -->
+      <circle cx="100" cy="205" r="6" fill="#fff9c4" opacity="0.9"/>
+      <circle cx="130" cy="198" r="5" fill="#e1f5fe" opacity="0.9"/>
+      <circle cx="160" cy="207" r="7" fill="#fff9c4" opacity="0.9"/>
+      <circle cx="195" cy="197" r="5" fill="#fce4ec" opacity="0.9"/>
+      <circle cx="225" cy="205" r="6" fill="#e1f5fe" opacity="0.9"/>
+      <circle cx="245" cy="195" r="4" fill="#fff9c4" opacity="0.9"/>
+
+      <!-- Hearts on middle layer -->
+      <text x="120" y="158" font-size="18" text-anchor="middle">💛</text>
+      <text x="170" y="156" font-size="16" text-anchor="middle">💙</text>
+      <text x="218" y="158" font-size="18" text-anchor="middle">💗</text>
+
+      <!-- Candles -->
+      <!-- Candle 1 (far left) -->
+      <rect x="118" y="42" width="10" height="32" rx="3" fill="#ff80ab"/>
+      <ellipse cx="123" cy="42" rx="5" ry="3" fill="#f48fb1"/>
+      <g class="flame">
+        <ellipse cx="123" cy="33" rx="5" ry="8" fill="#ff6f00" opacity="0.9"/>
+        <ellipse cx="123" cy="36" rx="3" ry="5" fill="#ffca28"/>
+        <ellipse cx="123" cy="38" rx="1.5" ry="2.5" fill="#fff9c4"/>
+      </g>
+
+      <!-- Candle 2 -->
+      <rect x="138" y="38" width="10" height="36" rx="3" fill="#fff176"/>
+      <ellipse cx="143" cy="38" rx="5" ry="3" fill="#fff9c4"/>
+      <g class="flame">
+        <ellipse cx="143" cy="29" rx="5" ry="8" fill="#e91e8c" opacity="0.9"/>
+        <ellipse cx="143" cy="32" rx="3" ry="5" fill="#ff80ab"/>
+        <ellipse cx="143" cy="34" rx="1.5" ry="2.5" fill="#fce4ec"/>
+      </g>
+
+      <!-- Candle 3 (center) -->
+      <rect x="162" y="35" width="12" height="38" rx="3" fill="#90caf9"/>
+      <ellipse cx="168" cy="35" rx="6" ry="3.5" fill="#bbdefb"/>
+      <g class="flame">
+        <ellipse cx="168" cy="25" rx="6" ry="9" fill="#ff6f00" opacity="0.95"/>
+        <ellipse cx="168" cy="29" rx="3.5" ry="6" fill="#ffca28"/>
+        <ellipse cx="168" cy="31" rx="2" ry="3" fill="#fff9c4"/>
+      </g>
+
+      <!-- Candle 4 -->
+      <rect x="188" y="38" width="10" height="36" rx="3" fill="#ff80ab"/>
+      <ellipse cx="193" cy="38" rx="5" ry="3" fill="#f48fb1"/>
+      <g class="flame">
+        <ellipse cx="193" cy="29" rx="5" ry="8" fill="#1565c0" opacity="0.9"/>
+        <ellipse cx="193" cy="32" rx="3" ry="5" fill="#42a5f5"/>
+        <ellipse cx="193" cy="34" rx="1.5" ry="2.5" fill="#e3f2fd"/>
+      </g>
+
+      <!-- Candle 5 (far right) -->
+      <rect x="208" y="42" width="10" height="32" rx="3" fill="#fff176"/>
+      <ellipse cx="213" cy="42" rx="5" ry="3" fill="#fff9c4"/>
+      <g class="flame">
+        <ellipse cx="213" cy="33" rx="5" ry="8" fill="#e91e8c" opacity="0.9"/>
+        <ellipse cx="213" cy="36" rx="3" ry="5" fill="#ff80ab"/>
+        <ellipse cx="213" cy="38" rx="1.5" ry="2.5" fill="#fce4ec"/>
+      </g>
+
+      <!-- Sparkles around -->
+      <g class="sparkle">
+        <path d="M55,60 L58,52 L61,60 L69,63 L61,66 L58,74 L55,66 L47,63 Z" fill="#ffd740" opacity="0.8"/>
+      </g>
+      <g class="sparkle">
+        <path d="M285,80 L287,74 L289,80 L295,82 L289,84 L287,90 L285,84 L279,82 Z" fill="#ff80ab" opacity="0.8"/>
+      </g>
+      <g class="sparkle">
+        <path d="M40,130 L42,125 L44,130 L49,132 L44,134 L42,139 L40,134 L35,132 Z" fill="#42a5f5" opacity="0.7"/>
+      </g>
+
+      <!-- "21" or decorative number on cake -->
+      <text x="170" y="103" font-family="Playfair Display, serif" font-size="20" font-weight="700" fill="white" text-anchor="middle" opacity="0.95">🎂</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Message card -->
+<div class="message-section">
+  <div class="message-card">
+    <h2>To My Amazing Sister 🌸</h2>
+    <p>
+      Today is YOUR day — a day as beautiful, bright, and colourful as you are!
+      May every candle you blow out bring a dream come true,
+      every wish you make become your reality,
+      and every single moment of today be filled with joy, laughter, and love.
+      <br><br>
+      You deserve the whole world and everything beyond it. 🌍💛💙💗
+    </p>
+    <div class="color-dots">
+      <div class="dot" style="background:#e91e8c;"></div>
+      <div class="dot" style="background:#ffd740;"></div>
+      <div class="dot" style="background:#42a5f5;"></div>
+      <div class="dot" style="background:#e91e8c;"></div>
+      <div class="dot" style="background:#ffd740;"></div>
+      <div class="dot" style="background:#42a5f5;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Gift section -->
+<div class="gift-section">
+  <div class="gift-title">🎁 A Special Gift Just For You...</div>
+
+  <div class="gift-box gift-bounce" id="giftBox" onclick="openGift()" title="Click to open your gift!">
+    <div class="gift-shadow"></div>
+    <svg class="gift-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- Box body -->
+      <rect x="25" y="90" width="130" height="80" rx="6" fill="#ff80ab"/>
+      <rect x="25" y="90" width="130" height="80" rx="6" fill="url(#giftPattern)" opacity="0.3"/>
+
+      <!-- Box lid -->
+      <rect x="18" y="72" width="144" height="24" rx="6" fill="#e91e8c"/>
+
+      <!-- Ribbon vertical -->
+      <rect x="83" y="72" width="14" height="98" rx="3" fill="#ffd740"/>
+      <!-- Ribbon horizontal -->
+      <rect x="18" y="80" width="144" height="14" rx="3" fill="#ffd740"/>
+
+      <!-- Bow left loop -->
+      <ellipse cx="82" cy="56" rx="24" ry="16" fill="#ff80ab" transform="rotate(-30, 82, 56)"/>
+      <ellipse cx="82" cy="56" rx="16" ry="10" fill="#fce4ec" transform="rotate(-30, 82, 56)" opacity="0.5"/>
+      <!-- Bow right loop -->
+      <ellipse cx="98" cy="56" rx="24" ry="16" fill="#ff80ab" transform="rotate(30, 98, 56)"/>
+      <ellipse cx="98" cy="56" rx="16" ry="10" fill="#fce4ec" transform="rotate(30, 98, 56)" opacity="0.5"/>
+      <!-- Bow center -->
+      <circle cx="90" cy="60" r="10" fill="#e91e8c"/>
+      <circle cx="90" cy="60" r="6" fill="#ffd740"/>
+
+      <!-- Stars on box -->
+      <text x="50" y="140" font-size="18" text-anchor="middle">⭐</text>
+      <text x="130" y="132" font-size="14" text-anchor="middle">💛</text>
+      <text x="55" y="118" font-size="12" text-anchor="middle">💙</text>
+
+      <defs>
+        <pattern id="giftPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r="2" fill="white"/>
+        </pattern>
+      </defs>
+    </svg>
+  </div>
+  <div class="gift-hint">✨ Tap the gift to open ✨</div>
+</div>
+
+<!-- Reveal overlay -->
+<div class="reveal-overlay" id="revealOverlay">
+  <div class="reveal-card">
+    <div class="reveal-emoji">🎉</div>
+    <h2>Your Special Gift!</h2>
+    <p>With all my love, I'm so proud of everything you've built. Here is your very own corner of the world — your business website! Go show them what you've got, sis! 💪💖</p>
+
+    <div class="reveal-link-box">
+      <div class="reveal-link-inner">
+        <div class="reveal-link-label">🌐 Your Business Website</div>
+        <a class="reveal-link-url" href="https://your-sisters-website.com" target="_blank" id="siteLink">
+          www.your-sisters-website.com
+        </a>
+      </div>
+    </div>
+
+    <a class="reveal-visit-btn" href="https://your-sisters-website.com" target="_blank" id="visitBtn">
+      Visit My Website 🚀
+    </a>
+    <button class="close-btn" onclick="closeGift()">Close</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-ribbon">
+  Made with 💗 💛 💙 &nbsp;|&nbsp; Happy Birthday, Sis! &nbsp;|&nbsp; 🎂✨🎊
+</div>
+
+<script>
+  // Generate floating particles
+  const colors = ['#ff80ab','#ffd740','#90caf9','#f48fb1','#fff176','#64b5f6','#ffca28','#e91e8c'];
+  const pContainer = document.getElementById('particles');
+  for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 6 + Math.random() * 12;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${6+Math.random()*10}s;
+      animation-delay:${Math.random()*8}s;
+      border-radius:${Math.random()>0.5?'50%':'3px'};
+    `;
+    pContainer.appendChild(p);
+  }
+
+  function launchConfetti() {
+    const cols = ['#e91e8c','#ffd740','#42a5f5','#ff80ab','#fff176','#90caf9'];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left:${Math.random()*100}vw;
+        top:-10px;
+        background:${cols[Math.floor(Math.random()*cols.length)]};
+        width:${6+Math.random()*8}px;
+        height:${6+Math.random()*8}px;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+        animation-duration:${2+Math.random()*2}s;
+        animation-delay:${Math.random()*0.5}s;
+      `;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4000);
+    }
+  }
+
+  function openGift() {
+    document.getElementById('revealOverlay').classList.add('show');
+    launchConfetti();
+    document.getElementById('giftBox').style.transform = 'scale(0)';
+    document.getElementById('giftBox').style.transition = 'transform 0.4s ease-in';
+  }
+
+  function closeGift() {
+    document.getElementById('revealOverlay').classList.remove('show');
+    document.getElementById('giftBox').style.transform = '';
+    document.getElementById('giftBox').style.transition = '';
+  }
+</script>
+</body>
+</html>
