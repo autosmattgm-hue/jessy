@@ -1,0 +1,14 @@
+{
+  "name": "jessy-nailed-it-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jessy Nailed It beauty studio website with Jessy AI concierge.",
+  "scripts": {
+    "dev": "node server.js",
+    "check": "node --check server.js && node --check api/jessy-ai.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

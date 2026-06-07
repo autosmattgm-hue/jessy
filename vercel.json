@@ -1,0 +1,60 @@
+{
+  "rewrites": [
+    {
+      "source": "/ai",
+      "destination": "/jessy-ai.html"
+    },
+    {
+      "source": "/jessy-ai",
+      "destination": "/jessy-ai.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/pricing.html"
+    },
+    {
+      "source": "/prices",
+      "destination": "/pricing.html"
+    },
+    {
+      "source": "/styles",
+      "destination": "/styles.html"
+    },
+    {
+      "source": "/showroom",
+      "destination": "/showroom.html"
+    },
+    {
+      "source": "/show-room",
+      "destination": "/showroom.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
+}

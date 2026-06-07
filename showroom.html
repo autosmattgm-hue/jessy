@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Showroom Gallery | Jessy Nailed It Lagos</title>
+<meta name="description" content="Browse the Jessy Nailed It showroom with local client images and real Unsplash beauty inspiration. 50 pictures, shown 10 per page.">
+<meta name="theme-color" content="#FF4D8D">
+<meta property="og:title" content="Showroom Gallery | Jessy Nailed It Lagos">
+<meta property="og:description" content="Explore nails, lashes, braids, hair styling and beauty inspiration in the Jessy Nailed It showroom.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1772322586754-34c9e6f5be6f?auto=format&fit=crop&w=1200&h=630&q=85">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Showroom Gallery | Jessy Nailed It Lagos">
+<meta name="twitter:description" content="50 beauty showroom pictures, 10 per page.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1772322586754-34c9e6f5be6f?auto=format&fit=crop&w=1200&h=630&q=85">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23FF4D8D'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' font-family='Arial' fill='white'%3EJ%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true">
+  <button class="close-btn" type="button" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html#services" onclick="closeMobileMenu()">Services</a>
+  <a href="index.html#gallery" onclick="closeMobileMenu()">Gallery</a>
+  <a href="showroom.html" onclick="closeMobileMenu()" aria-current="page">Showroom</a>
+  <a href="styles.html" onclick="closeMobileMenu()">Styles</a>
+  <a href="jessy-ai.html" onclick="closeMobileMenu()">Jessy AI</a>
+  <a href="pricing.html" onclick="closeMobileMenu()">Prices</a>
+  <a href="about.html" onclick="closeMobileMenu()">About</a>
+  <a href="#booking" onclick="closeMobileMenu()">Book Now</a>
+</div>
+
+<nav id="navbar" aria-label="Primary navigation">
+  <a href="index.html" class="logo" aria-label="Jessy Nailed It home">Jessy Nailed It</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#gallery">Gallery</a></li>
+    <li><a href="showroom.html" aria-current="page">Showroom</a></li>
+    <li><a href="styles.html">Styles</a></li>
+    <li><a href="jessy-ai.html">Jessy AI</a></li>
+    <li><a href="pricing.html">Prices</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" type="button" onclick="openMobileMenu()" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section class="page-hero showroom-page">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Jessy Beauty Showroom</div>
+    <h1>50 pictures of real glam inspiration</h1>
+    <p>Browse images from this project plus real  beauty inspiration for nails, lashes, braids and salon-ready looks. The showroom shows 10 pictures per page.</p>
+    <div class="page-actions">
+      <a href="#showroom" class="btn-primary">Open Showroom</a>
+      <a href="jessy-ai.html" class="btn-secondary">Ask Jessy AI</a>
+    </div>
+  </div>
+</section>
+
+<section class="showroom-section" id="showroom">
+  <div class="section-header reveal">
+    <div class="section-tag">✦ Gallery</div>
+    <h2 class="section-title">The <span class="accent">Showroom</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Exactly 50 pictures, including every local JPEG in the project. Use the controls to browse 10 pictures at a time.</p>
+  </div>
+
+  <div class="showroom-toolbar reveal">
+    <div>
+      <strong id="showroomCount">Showing 1-10 of 50</strong>
+      
+    </div>
+    <a href="https://wa.me/2349076649660?text=Hi%20Jessy!%20I%20saw%20a%20showroom%20look%20I%20want%20to%20book" target="_blank" rel="noopener">Book a showroom look</a>
+  </div>
+
+  <div class="showroom-grid" id="showroomGrid" aria-live="polite"></div>
+  <div class="showroom-pagination" id="showroomPagination" aria-label="Showroom pagination"></div>
+  <noscript><p style="text-align:center;margin-top:24px;">Please enable JavaScript to browse the 50-picture showroom.</p></noscript>
+</section>
+
+<section class="booking-section" id="booking">
+  <div class="blob-dark"></div>
+  <div class="blob-dark"></div>
+  <div class="blob-dark"></div>
+  <div class="booking-content">
+    <div class="hero-badge" style="margin-bottom:24px;">✦ Found Your Look? ✦</div>
+    <h2>Ready to Turn Inspo Into <span class="gradient-text">Your Own Glam?</span></h2>
+    <p>Send the showroom page number or screenshot on WhatsApp and Jessy will help match the service, timing and final price.</p>
+    <a href="https://wa.me/2349076649660?text=Hi%20Jessy!%20I%20found%20a%20look%20in%20the%20showroom%20and%20want%20to%20book" target="_blank" rel="noopener" class="btn-whatsapp" aria-label="Chat with Jessy on WhatsApp to book a showroom look">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.114 1.528 5.836L0 24l6.335-1.508A11.933 11.933 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.031-1.384l-.361-.214-3.741.981.998-3.647-.235-.374A9.819 9.819 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/></svg>
+      Chat with Jessy on WhatsApp
+    </a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-logo">Jessy Nailed It ✨</div>
+  <p style="font-size:0.82rem;margin-bottom:8px;">Premier Beauty Studio • Lagos, Nigeria</p>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#gallery">Gallery</a>
+    <a href="showroom.html">Showroom</a>
+    <a href="styles.html">Styles</a>
+    <a href="jessy-ai.html">Jessy AI</a>
+    <a href="pricing.html">Prices</a>
+    <a href="about.html#testimonials">Reviews</a>
+    <a href="about.html">About</a>
+    <a href="#booking">Book Now</a>
+  </div>
+  <p style="margin-top:16px;font-size:0.78rem;">
+    © 2026 Jessy Nailed It &nbsp;|&nbsp; Lagos, Nigeria<br>
+    WhatsApp: <a href="https://wa.me/2349076649660" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none;">09076649660</a>
+  </p>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
